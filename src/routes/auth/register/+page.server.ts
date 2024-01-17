@@ -2,19 +2,28 @@ import type { Actions, PageServerLoad } from './$types';
 
 import { message, setError, superValidate } from 'sveltekit-superforms/server';
 
-import { checkIfEmailExists, insertNewUser } from '$lib/database/databaseUtils.server';
+import {
+	checkIfEmailExists,
+	deleteAllUsers,
+	getAllUsers,
+	insertNewUser
+} from '$lib/database/databaseUtils.server';
 import type { AlertMessageType } from '$lib/types';
 import { logError } from '$lib/utils';
 import { RegisterUserSchema } from '$validations/RegisterUserSchema';
 
 export const load = (async () => {
 	return {
-		registerUserFormData: await superValidate(RegisterUserSchema)
+		registerUserFormData: await superValidate(RegisterUserSchema),
+
+		allUsers: await getAllUsers()
 	};
 }) satisfies PageServerLoad;
 
 export const actions: Actions = {
-	deleteAllUsers: async () => {},
+	deleteAllUsers: async () => {
+		await deleteAllUsers();
+	},
 
 	registerUser: async ({ request }) => {
 		const registerUserFormData = await superValidate<typeof RegisterUserSchema, AlertMessageType>(
@@ -36,7 +45,7 @@ export const actions: Actions = {
 				return setError(registerUserFormData, 'email', 'Email already exists.');
 			}
 
-			insertNewUser({
+			await insertNewUser({
 				name: registerUserFormData.data.name,
 				email: registerUserFormData.data.email,
 				password: registerUserFormData.data.password
