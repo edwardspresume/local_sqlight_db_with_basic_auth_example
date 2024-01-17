@@ -75,5 +75,13 @@
 				<Button type="submit">Delete all users</Button>
 			</form>
 		</header>
+
+		{#if data.allUsers}
+			<ul class="space-y-2 list-disc list-inside">
+				{#each data.allUsers as user}
+					<li>{user.name}</li>
+				{/each}
+			</ul>
+		{/if}
 	</section>
 </div>
