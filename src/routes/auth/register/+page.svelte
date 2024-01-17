@@ -7,8 +7,8 @@
 
 	import InputField from '$components/form/InputField.svelte';
 	import SubmitButton from '$components/form/SubmitButton.svelte';
-	import { route } from '$lib/ROUTES';
 	import Button from '$components/ui/button/button.svelte';
+	import { route } from '$lib/ROUTES';
 
 	export let data: PageData;
 
@@ -22,7 +22,7 @@
 	<section>
 		<h2 class="mb-4 text-2xl font-bold">Register</h2>
 
-		<form method="post" use:enhance class="space-y-4">
+		<form method="post" use:enhance class="space-y-4" action={route('registerUser /auth/register')}>
 			<InputField
 				type="text"
 				name="name"
