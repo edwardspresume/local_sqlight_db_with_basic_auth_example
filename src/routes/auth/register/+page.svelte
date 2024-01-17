@@ -1,20 +1,36 @@
 <script lang="ts">
 	import type { PageData } from './$types';
 
+	import { toast } from 'svelte-sonner';
 	import { superForm } from 'sveltekit-superforms/client';
 
+	import { route } from '$lib/ROUTES';
 	import { RegisterUserSchema } from '$validations/RegisterUserSchema';
 
 	import InputField from '$components/form/InputField.svelte';
 	import SubmitButton from '$components/form/SubmitButton.svelte';
 	import Button from '$components/ui/button/button.svelte';
-	import { route } from '$lib/ROUTES';
 
 	export let data: PageData;
 
-	const { enhance, errors, form } = superForm(data.registerUserFormData, {
+	const { enhance, errors, form, message } = superForm(data.registerUserFormData, {
+		resetForm: true,
 		taintedMessage: null,
-		validators: RegisterUserSchema
+		validators: RegisterUserSchema,
+
+		onUpdated: () => {
+			if (!$message) return;
+
+			const { alertType, alertText } = $message;
+
+			if (alertType === 'success') {
+				toast.success(alertText);
+			}
+
+			if (alertType === 'error') {
+				toast.error(alertText);
+			}
+		}
 	});
 </script>
 
