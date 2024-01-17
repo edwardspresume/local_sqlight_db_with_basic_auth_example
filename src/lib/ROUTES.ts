@@ -25,7 +25,8 @@ const SERVERS = {
  * ACTIONS
  */
 const ACTIONS = {
-  
+  "deleteAllUsers /auth/register": `/auth/register?/deleteAllUsers`,
+  "registerUser /auth/register": `/auth/register?/registerUser`
 }
 
 /**
@@ -113,7 +114,7 @@ export function route<T extends keyof AllTypes>(key: T, ...params: any[]): strin
 export type KIT_ROUTES = { 
   PAGES: { '/': never, '/auth/login': never, '/auth/register': never }
   SERVERS: Record<string, never>
-  ACTIONS: Record<string, never>
+  ACTIONS: { 'deleteAllUsers /auth/register': never, 'registerUser /auth/register': never }
   LINKS: Record<string, never>
   Params: Record<string, never>
 }
