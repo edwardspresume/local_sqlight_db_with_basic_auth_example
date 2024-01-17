@@ -1,5 +1,5 @@
 {
-	"name": "base-kit",
+	"name": "local_sqlight_db_with_basic_auth_example",
 	"version": "0.0.1",
 	"packageManager": "pnpm@8.14.0",
 	"scripts": {
