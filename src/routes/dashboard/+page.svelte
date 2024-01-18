@@ -6,8 +6,8 @@
 	export let data: PageData;
 </script>
 
-<h1>
-	Hello {data.loggedOnUser}
+<h1 class="mb-5 text-2xl">
+	Hello <span class="font-bold">{data.loggedOnUser}</span>
 </h1>
 
 <form method="post">
