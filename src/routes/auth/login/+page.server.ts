@@ -1,4 +1,4 @@
-import { SESSION_COOKIE_NAME } from '$lib/constants';
+import { DASHBOARD_ROUTE, SESSION_COOKIE_NAME } from '$lib/constants';
 import { database } from '$lib/database/database.server';
 import { usersTable } from '$lib/database/schema';
 import type { AlertMessageType } from '$lib/types';
@@ -8,7 +8,13 @@ import { eq } from 'drizzle-orm';
 import { message, setError, superValidate } from 'sveltekit-superforms/server';
 import type { Actions, PageServerLoad } from './$types';
 
-export const load = (async () => {
+export const load = (async ({ cookies }) => {
+	const session = cookies.get(SESSION_COOKIE_NAME);
+
+	if (session) {
+		throw redirect(307, DASHBOARD_ROUTE);
+	}
+
 	return {
 		userLoginFormData: await superValidate(UserLogInSchema)
 	};
@@ -49,6 +55,6 @@ export const actions: Actions = {
 			path: '/'
 		});
 
-		throw redirect(307, '/dashboard');
+		throw redirect(307, DASHBOARD_ROUTE);
 	}
 };
