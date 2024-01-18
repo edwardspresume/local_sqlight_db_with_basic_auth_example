@@ -10,7 +10,7 @@
 
 	export let data: PageData;
 
-	const { enhance, form, errors } = superForm(data.UserLoginFormData, {
+	const { enhance, form, errors } = superForm(data.userLoginFormData, {
 		resetForm: true,
 		taintedMessage: null,
 		validators: UserLogInSchema

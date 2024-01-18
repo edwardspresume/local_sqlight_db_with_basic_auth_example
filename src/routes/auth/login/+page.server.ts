@@ -1,5 +1,54 @@
-import type { PageServerLoad } from './$types';
+import { SESSION_COOKIE_NAME } from '$lib/constants';
+import { database } from '$lib/database/database.server';
+import { usersTable } from '$lib/database/schema';
+import type { AlertMessageType } from '$lib/types';
+import { UserLogInSchema } from '$validations/UserLogInSchema';
+import { redirect } from '@sveltejs/kit';
+import { eq } from 'drizzle-orm';
+import { message, setError, superValidate } from 'sveltekit-superforms/server';
+import type { Actions, PageServerLoad } from './$types';
 
 export const load = (async () => {
-	return {};
+	return {
+		userLoginFormData: await superValidate(UserLogInSchema)
+	};
 }) satisfies PageServerLoad;
+
+export const actions: Actions = {
+	default: async ({ request, cookies }) => {
+		const userLoginFormData = await superValidate<typeof UserLogInSchema, AlertMessageType>(
+			request,
+			UserLogInSchema
+		);
+
+		if (userLoginFormData.valid === false) {
+			return message(userLoginFormData, {
+				alertType: 'error',
+
+				alertText: 'There was a problem with your submission.'
+			});
+		}
+
+		const [user] = await database
+			.select({
+				id: usersTable.id,
+				password: usersTable.password
+			})
+			.from(usersTable)
+			.where(eq(usersTable.email, userLoginFormData.data.email));
+
+		if (user === undefined) {
+			return setError(userLoginFormData, 'email', 'Email not found');
+		}
+
+		if (user.password !== userLoginFormData.data.password) {
+			return setError(userLoginFormData, 'password', 'Incorrect password');
+		}
+
+		cookies.set(SESSION_COOKIE_NAME, user.id, {
+			path: '/'
+		});
+
+		throw redirect(307, '/dashboard');
+	}
+};
