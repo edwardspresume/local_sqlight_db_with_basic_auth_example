@@ -1,34 +1,45 @@
 <script lang="ts">
-	import type { PageData } from './$types';
-
-	import { superForm } from 'sveltekit-superforms/client';
-
-	import { UserLogInSchema } from '$validations/UserLogInSchema';
-
 	import InputField from '$components/form/InputField.svelte';
 	import SubmitButton from '$components/form/SubmitButton.svelte';
+	import { UserLogInSchema } from '$validations/UserLogInSchema';
+	import { toast } from 'svelte-sonner';
+	import { superForm } from 'sveltekit-superforms/client';
+	import type { PageData } from './$types';
 
 	export let data: PageData;
 
-	const { enhance, form, errors } = superForm(data.userLoginFormData, {
+	const { enhance, form, errors, message } = superForm(data.userLoginFormData, {
 		resetForm: true,
 		taintedMessage: null,
-		validators: UserLogInSchema
+		validators: UserLogInSchema,
+
+		onUpdated: () => {
+			if (!$message) return;
+
+			const { alertType, alertText } = $message;
+
+			if (alertType === 'error') {
+				toast.error(alertText);
+			}
+		}
 	});
 </script>
 
-<form class="space-y-4" method="post" use:enhance>
+<h1 class="mb-4 text-2xl font-bold">Login</h1>
+
+<form method="post" use:enhance class="space-y-4">
 	<InputField
+		type="email"
 		name="email"
 		label="Email"
-		type="email"
 		bind:value={$form.email}
 		errorMessage={$errors.email}
 	/>
+
 	<InputField
+		type="password"
 		name="password"
 		label="Password"
-		type="password"
 		bind:value={$form.password}
 		errorMessage={$errors.password}
 	/>
