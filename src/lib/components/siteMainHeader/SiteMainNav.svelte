@@ -26,6 +26,17 @@
 	// static classes
 	const staticClasses =
 		'absolute left-0 z-50 w-full px-4 pt-10 transition-transform duration-300 top-full h-svh sm:h-full sm:relative sm:w-fit sm:-translate-x-0 sm:p-0 bg-secondary sm:bg-transparent';
+
+	const sessionLinks = {
+		home: mainNavLinks.home,
+		dashboard: mainNavLinks.dashboard
+	};
+
+	const nonSessionLinks = {
+		home: mainNavLinks.home,
+		login: mainNavLinks.login,
+		register: mainNavLinks.register
+	};
 </script>
 
 <nav
@@ -34,7 +45,7 @@
 	class={cn(staticClasses, dynamicClasses, className)}
 >
 	<ul class="grid gap-5 *:*:w-full sm:flex sm:gap-2">
-		{#each Object.values(mainNavLinks) as link}
+		{#each Object.values($page.data['session'] ? sessionLinks : nonSessionLinks) as link}
 			{@const isCurrentPage = $page.url.pathname === link.href ? 'page' : undefined}
 
 			<li>
