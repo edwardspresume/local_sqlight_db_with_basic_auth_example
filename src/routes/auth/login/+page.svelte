@@ -1,9 +1,12 @@
 <script lang="ts">
-	import InputField from '$components/form/InputField.svelte';
-	import SubmitButton from '$components/form/SubmitButton.svelte';
-	import { UserLogInSchema } from '$validations/UserLogInSchema';
 	import { toast } from 'svelte-sonner';
 	import { superForm } from 'sveltekit-superforms/client';
+
+	import { UserLogInSchema } from '$validations/UserLogInSchema';
+
+	import InputField from '$components/form/InputField.svelte';
+	import SubmitButton from '$components/form/SubmitButton.svelte';
+
 	import type { PageData } from './$types';
 
 	export let data: PageData;
