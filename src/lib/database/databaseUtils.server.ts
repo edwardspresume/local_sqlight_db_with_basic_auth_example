@@ -1,6 +1,6 @@
 import { eq } from 'drizzle-orm';
 import { database } from './database.server';
-import { usersTable, type userInsertSchema } from './schema';
+import { usersTable, type UserInsertSchema } from './schema';
 
 export const checkIfEmailExists = async (email: string) => {
 	const queryResult = await database
@@ -13,7 +13,7 @@ export const checkIfEmailExists = async (email: string) => {
 	return queryResult.length > 0;
 };
 
-export const insertNewUser = async (user: userInsertSchema) => {
+export const insertNewUser = async (user: UserInsertSchema) => {
 	return await database.insert(usersTable).values(user);
 };
 
@@ -31,4 +31,15 @@ export const getAllUsers = async () => {
 
 export const deleteAllUsers = async () => {
 	return await database.delete(usersTable);
+};
+
+export const getUserName = async (userId: string) => {
+	const queryResult = await database
+		.select({
+			name: usersTable.name
+		})
+		.from(usersTable)
+		.where(eq(usersTable.id, userId));
+
+	return queryResult[0]?.name;
 };
