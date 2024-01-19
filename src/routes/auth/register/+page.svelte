@@ -68,6 +68,7 @@
 		</form>
 	</section>
 
+	<hr class="sm:hidden" />
 
 	<section>
 		<header class="flex justify-between">
