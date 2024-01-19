@@ -2,7 +2,7 @@ import { DASHBOARD_ROUTE, SESSION_COOKIE_NAME } from '$lib/constants';
 import { database } from '$lib/database/database.server';
 import { usersTable } from '$lib/database/schema';
 import type { AlertMessageType } from '$lib/types';
-import { UserLogInSchema } from '$validations/UserLoginZodSchema';
+import { UserLoginZodSchema } from '$validations/UserLoginZodSchema';
 import { redirect } from '@sveltejs/kit';
 import { eq } from 'drizzle-orm';
 import { message, setError, superValidate } from 'sveltekit-superforms/server';
@@ -16,15 +16,15 @@ export const load = (async ({ cookies }) => {
 	}
 
 	return {
-		userLoginFormData: await superValidate(UserLogInSchema)
+		userLoginFormData: await superValidate(UserLoginZodSchema)
 	};
 }) satisfies PageServerLoad;
 
 export const actions: Actions = {
 	default: async ({ request, cookies }) => {
-		const userLoginFormData = await superValidate<typeof UserLogInSchema, AlertMessageType>(
+		const userLoginFormData = await superValidate<typeof UserLoginZodSchema, AlertMessageType>(
 			request,
-			UserLogInSchema
+			UserLoginZodSchema
 		);
 
 		if (userLoginFormData.valid === false) {

@@ -2,7 +2,7 @@
 	import { toast } from 'svelte-sonner';
 	import { superForm } from 'sveltekit-superforms/client';
 
-	import { UserLogInSchema } from '$validations/UserLoginZodSchema';
+	import { UserLoginZodSchema } from '$validations/UserLoginZodSchema';
 
 	import InputField from '$components/form/InputField.svelte';
 	import SubmitButton from '$components/form/SubmitButton.svelte';
@@ -14,7 +14,7 @@
 	const { enhance, form, errors, message } = superForm(data.userLoginFormData, {
 		resetForm: true,
 		taintedMessage: null,
-		validators: UserLogInSchema,
+		validators: UserLoginZodSchema,
 
 		onUpdated: () => {
 			if (!$message) return;
