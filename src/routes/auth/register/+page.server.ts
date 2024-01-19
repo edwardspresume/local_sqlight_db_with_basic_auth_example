@@ -23,6 +23,10 @@ export const load = (async () => {
 export const actions: Actions = {
 	deleteAllUsers: async () => {
 		await deleteAllUsers();
+
+		cookies.delete(SESSION_COOKIE_NAME, {
+			path: '/'
+		});
 	},
 
 	registerUser: async ({ request }) => {
