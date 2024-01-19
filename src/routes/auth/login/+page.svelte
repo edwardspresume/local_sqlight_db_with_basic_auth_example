@@ -2,7 +2,7 @@
 	import { toast } from 'svelte-sonner';
 	import { superForm } from 'sveltekit-superforms/client';
 
-	import { UserLogInSchema } from '$validations/UserLogInSchema';
+	import { UserLogInSchema } from '$validations/UserLoginZodSchema';
 
 	import InputField from '$components/form/InputField.svelte';
 	import SubmitButton from '$components/form/SubmitButton.svelte';

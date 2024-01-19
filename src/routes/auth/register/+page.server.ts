@@ -10,7 +10,7 @@ import {
 } from '$lib/database/databaseUtils.server';
 import type { AlertMessageType } from '$lib/types';
 import { logError } from '$lib/utils';
-import { RegisterUserSchema } from '$validations/RegisterUserSchema';
+import { RegisterUserSchema } from '$validations/RegisterUserZodSchema';
 
 export const load = (async () => {
 	return {

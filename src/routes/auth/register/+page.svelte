@@ -5,7 +5,7 @@
 	import { superForm } from 'sveltekit-superforms/client';
 
 	import { route } from '$lib/ROUTES';
-	import { RegisterUserSchema } from '$validations/RegisterUserSchema';
+	import { RegisterUserSchema } from '$validations/RegisterUserZodSchema';
 
 	import InputField from '$components/form/InputField.svelte';
 	import SubmitButton from '$components/form/SubmitButton.svelte';

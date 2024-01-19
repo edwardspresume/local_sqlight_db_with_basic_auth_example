@@ -2,7 +2,7 @@ import { DASHBOARD_ROUTE, SESSION_COOKIE_NAME } from '$lib/constants';
 import { database } from '$lib/database/database.server';
 import { usersTable } from '$lib/database/schema';
 import type { AlertMessageType } from '$lib/types';
-import { UserLogInSchema } from '$validations/UserLogInSchema';
+import { UserLogInSchema } from '$validations/UserLoginZodSchema';
 import { redirect } from '@sveltejs/kit';
 import { eq } from 'drizzle-orm';
 import { message, setError, superValidate } from 'sveltekit-superforms/server';
