@@ -32,11 +32,13 @@
 		dashboard: mainNavLinks.dashboard
 	};
 
-	const nonSessionLinks = {
+	const noneSessionLinks = {
 		home: mainNavLinks.home,
 		login: mainNavLinks.login,
 		register: mainNavLinks.register
 	};
+
+	$: isSession = $page.data.session;
 </script>
 
 <nav
@@ -45,7 +47,7 @@
 	class={cn(staticClasses, dynamicClasses, className)}
 >
 	<ul class="grid gap-5 *:*:w-full sm:flex sm:gap-2">
-		{#each Object.values($page.data['session'] ? sessionLinks : nonSessionLinks) as link}
+		{#each Object.values(isSession ? sessionLinks : noneSessionLinks) as link}
 			{@const isCurrentPage = $page.url.pathname === link.href ? 'page' : undefined}
 
 			<li>
