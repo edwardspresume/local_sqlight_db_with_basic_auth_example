@@ -9,7 +9,6 @@
 
 	import InputField from '$components/form/InputField.svelte';
 	import SubmitButton from '$components/form/SubmitButton.svelte';
-	import Button from '$components/ui/button/button.svelte';
 
 	export let data: PageData;
 
@@ -75,7 +74,7 @@
 			<h2 class="mb-4 text-2xl font-bold">Registered users</h2>
 
 			<form method="post" action={route('deleteAllUsers /auth/register')}>
-				<Button type="submit">Delete all users</Button>
+				<SubmitButton>Delete all users</SubmitButton>
 			</form>
 		</header>
 
