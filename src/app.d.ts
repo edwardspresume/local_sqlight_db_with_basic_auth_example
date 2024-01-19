@@ -8,6 +8,7 @@ declare global {
 		// interface Locals {}
 		interface PageData {
 			pageMetaTags?: MetaTagsProps;
+			session: string | undefined;
 			flash?: { type: 'success' | 'error'; message: string };
 		}
 		// interface PageState {}
