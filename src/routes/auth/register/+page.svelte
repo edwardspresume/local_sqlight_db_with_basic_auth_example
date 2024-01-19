@@ -5,7 +5,7 @@
 	import { superForm } from 'sveltekit-superforms/client';
 
 	import { route } from '$lib/ROUTES';
-	import { RegisterUserSchema } from '$validations/RegisterUserZodSchema';
+	import { RegisterUserZodSchema } from '$validations/RegisterUserZodSchema';
 
 	import InputField from '$components/form/InputField.svelte';
 	import SubmitButton from '$components/form/SubmitButton.svelte';
@@ -16,7 +16,7 @@
 	const { enhance, errors, form, message } = superForm(data.registerUserFormData, {
 		resetForm: true,
 		taintedMessage: null,
-		validators: RegisterUserSchema,
+		validators: RegisterUserZodSchema,
 
 		onUpdated: () => {
 			if (!$message) return;

@@ -10,11 +10,11 @@ import {
 } from '$lib/database/databaseUtils.server';
 import type { AlertMessageType } from '$lib/types';
 import { logError } from '$lib/utils';
-import { RegisterUserSchema } from '$validations/RegisterUserZodSchema';
+import { RegisterUserZodSchema } from '$validations/RegisterUserZodSchema';
 
 export const load = (async () => {
 	return {
-		registerUserFormData: await superValidate(RegisterUserSchema),
+		registerUserFormData: await superValidate(RegisterUserZodSchema),
 
 		allUsers: await getAllUsers()
 	};
@@ -30,10 +30,10 @@ export const actions: Actions = {
 	},
 
 	registerUser: async ({ request }) => {
-		const registerUserFormData = await superValidate<typeof RegisterUserSchema, AlertMessageType>(
-			request,
-			RegisterUserSchema
-		);
+		const registerUserFormData = await superValidate<
+			typeof RegisterUserZodSchema,
+			AlertMessageType
+		>(request, RegisterUserZodSchema);
 
 		if (registerUserFormData.valid === false) {
 			return message(registerUserFormData, {
@@ -45,9 +45,9 @@ export const actions: Actions = {
 		try {
 			const isEmailAlreadyRegistered = await checkIfEmailExists(registerUserFormData.data.email);
 
-		if (isEmailAlreadyRegistered === true) {
-			return setError(registerUserFormData, 'email', 'Email already registered');
-		}
+			if (isEmailAlreadyRegistered === true) {
+				return setError(registerUserFormData, 'email', 'Email already registered');
+			}
 
 			await insertNewUser({
 				name: registerUserFormData.data.name,
