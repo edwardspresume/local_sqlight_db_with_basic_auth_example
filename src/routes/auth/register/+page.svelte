@@ -71,7 +71,7 @@
 	<hr class="sm:hidden" />
 
 	<section>
-		<header class="flex justify-between">
+		<header class="flex flex-wrap justify-between gap-3">
 			<h2 class="mb-4 text-2xl font-bold">Registered users</h2>
 
 			<form method="post" action={route('deleteAllUsers /auth/register')}>
