@@ -45,9 +45,9 @@ export const actions: Actions = {
 		try {
 			const isEmailAlreadyRegistered = await checkIfEmailExists(registerUserFormData.data.email);
 
-			if (isEmailAlreadyRegistered === true) {
-				return setError(registerUserFormData, 'email', 'Email already exists.');
-			}
+		if (isEmailAlreadyRegistered === true) {
+			return setError(registerUserFormData, 'email', 'Email already registered');
+		}
 
 			await insertNewUser({
 				name: registerUserFormData.data.name,
