@@ -5,7 +5,7 @@
 	import { superForm } from 'sveltekit-superforms/client';
 
 	import { route } from '$lib/ROUTES';
-	import { RegisterUserZodSchema } from '$validations/RegisterUserZodSchema';
+	import { MAX_NAME_LENGTH, RegisterUserZodSchema } from '$validations/RegisterUserZodSchema';
 
 	import InputField from '$components/form/InputField.svelte';
 	import SubmitButton from '$components/form/SubmitButton.svelte';
@@ -45,6 +45,7 @@
 				label="Name"
 				bind:value={$form.name}
 				errorMessage={$errors.name}
+				maxlength={MAX_NAME_LENGTH}
 			/>
 
 			<InputField
@@ -66,6 +67,7 @@
 			<SubmitButton />
 		</form>
 	</section>
+
 
 	<section>
 		<header class="flex justify-between">
