@@ -1,4 +1,4 @@
-import { mainNavLinks } from "./navLinks";
+import { mainNavLinks } from './utils/navLinks';
 
 export const SESSION_COOKIE_NAME = 'session-id';
 
