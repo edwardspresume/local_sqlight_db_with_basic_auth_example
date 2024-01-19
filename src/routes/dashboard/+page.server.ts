@@ -20,7 +20,7 @@ export const load = (async ({ cookies }) => {
 		);
 	}
 	return {
-		loggedOnUser: await getUserName(userId)
+		loggedOnUserName: await getUserName(userId)
 	};
 }) satisfies PageServerLoad;
 

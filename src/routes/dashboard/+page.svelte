@@ -7,7 +7,7 @@
 </script>
 
 <h1 class="mb-5 text-2xl">
-	Hello <span class="font-bold">{data.loggedOnUser}</span>
+	Hello <span class="font-bold">{data.loggedOnUserName}</span>
 </h1>
 
 <form method="post">
