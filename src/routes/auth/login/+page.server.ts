@@ -44,7 +44,7 @@ export const actions: Actions = {
 			.where(eq(usersTable.email, userLoginFormData.data.email));
 
 		if (user === undefined) {
-			return setError(userLoginFormData, 'email', 'Email not found');
+			return setError(userLoginFormData, 'email', 'Email not registered');
 		}
 
 		if (user.password !== userLoginFormData.data.password) {
