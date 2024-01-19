@@ -11,6 +11,7 @@ import {
 import type { AlertMessageType } from '$lib/types';
 import { logError } from '$lib/utils';
 import { RegisterUserZodSchema } from '$validations/RegisterUserZodSchema';
+import { SESSION_COOKIE_NAME } from '$lib/constants';
 
 export const load = (async () => {
 	return {
@@ -21,7 +22,7 @@ export const load = (async () => {
 }) satisfies PageServerLoad;
 
 export const actions: Actions = {
-	deleteAllUsers: async () => {
+	deleteAllUsers: async ({ cookies }) => {
 		await deleteAllUsers();
 
 		cookies.delete(SESSION_COOKIE_NAME, {
