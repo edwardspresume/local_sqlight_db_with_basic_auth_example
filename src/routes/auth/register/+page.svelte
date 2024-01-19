@@ -79,9 +79,11 @@
 		</header>
 
 		{#if data.allUsers}
-			<ul class="space-y-2 list-disc list-inside">
+			<ul class="mt-4 space-y-4">
 				{#each data.allUsers as user}
-					<li>{user.name}</li>
+					<li class="p-2 rounded bg-accent">
+						{user.name} - {user.email}
+					</li>
 				{/each}
 			</ul>
 		{/if}
