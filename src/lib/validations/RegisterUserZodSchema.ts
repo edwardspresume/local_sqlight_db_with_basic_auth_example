@@ -9,5 +9,5 @@ export const RegisterUserZodSchema = createInsertSchema(usersTable, {
 			.min(2, 'Name must be at least 2 characters long')
 			.max(MAX_NAME_LENGTH, `Name must be less than ${MAX_NAME_LENGTH} characters long`),
 	email: (schema) => schema.email.email(),
-	password: (schema) => schema.password.min(2, 'Password must be at least 8 characters long')
+	password: (schema) => schema.password.min(2, 'Password must be at least 2 characters long')
 });
